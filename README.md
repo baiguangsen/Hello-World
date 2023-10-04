@@ -1,2 +1,1 @@
-# Hello-World
-My first Hello World!
+Print ("Hello World!")
