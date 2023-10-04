@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--时间-->
+    <script>
+        Date.prototype.format = function (fmt) {
+            var o = {
+                "y+": this.getFullYear, //年
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds() //秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        setInterval("document.getElementById('dateTime').innerHTML = (new Date()).format('yyyy-MM-dd hh:mm:ss');", 1000);
+    </script>
+    <div id="dateTime"></div>
+
+<!--定时器-->
+     <script>
+        function init(){
+            //书写轮播图片的定时功能
+            setInterval("changeImg()",2000);
+        }
+        //书写函数
+        var i=0;
+        function changeImg(){
+            i++;
+            //获取图片位置并设置src属性值
+            document.getElementById("img1").src="img/"+i+".jpg";
+            if(i==5){
+                i=0;
+            }
+        }
+    </script>
+	
+<!-- 网页标题图标 -->
+<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title align="right">柏广森的个人博客</title>
+		<link rel="icon" href="img/tubiao.svg" type="images/x-icon">
+	<style>
+	
+		/* 回到顶部按钮 */
+		/*火箭动态效果*/
+		 .com {
+		  background-image: url("./img/top.png");
+		  position: fixed;
+		  top: 80%;
+		  right: 3%;
+		  width: 150px;
+		  height: 175px;
+		  border-radius: 100%;
+    }
+    .com:hover {
+      animation: fly 0.6s steps(1) infinite;
+      background-image: url("./img/blbl.png");
+    }
+    @keyframes fly {
+      0% {
+        background-position-x: 0;
+      }
+      
+      25% {
+        background-position-x: -150px;
+      }
+      
+      50% {
+        background-position-x: -300px;
+      }
+      
+      75% {
+        background-position-x: -4500px;
+      }
+      
+      to {
+        background-position-x: -600px;
+      }
+    }
+		
+			<!--导航栏-->
+			li,ul,img,a,div{
+				border: 0;
+				list-style: none;
+			}
+			
+			div{
+				display: block;
+			}
+			
+			a{
+				color: #333333;
+				text-decoration: none;
+				outline: none;
+			}
+			
+			em{
+				font-weight: normal;
+			}
+			.ue-bar{
+				background-color: #000000;
+				opacity:0.5;
+			}
+			.ue-bar-wrap{
+				width: 61.25rem;
+				height: 4.375rem;
+				margin: 0 auto;
+				overflow: hidden;
+				position: relative;
+			}
+			.ue-bar-logo{
+				width: 8.375rem ;
+				height: 3.125rem;
+				float: left;
+				padding-right: 0.625rem;
+				padding-top: 0.5rem;
+			}
+			.ue-bar-logo a{
+				display: inline-block;
+				width: 100%;
+				height: 100;
+				margin-top: 12px;
+			}
+			
+			.ue-bar-nav{
+				height: 70px;
+				float: left;
+			}
+			
+			.ue-bar-nav li{
+				height: 70px;
+				float: left;
+				margin-right: 20px;
+			}
+			
+			.ue-bar-nav li *{
+				color: #dadada;
+				font-size: 14px;
+				display: inline-block;
+				line-height: 17px;
+				vertical-align: top;
+			}
+			
+			.ue-bar-nav li a{
+				height: 12px;
+				line-height: 22px;
+				padding: 26px 17px;
+			}
+			
+			.ue-bar-nav li.active{
+				background: #333;
+			}
+			
+			.ue-bar-nav li a:hover{
+				background: #333;
+			}
+			
+			
+			
+			/*星星特效背景*/
+			body {
+            background: radial-gradient(200% 100% at bottom center, #f7f7b6, #e96f92, #75517d, #1b2947);
+            background: radial-gradient(220% 105% at top center, #1b2947 10%, #75517d 40%, #e96f92 65%, #f7f7b6);
+            background-attachment: fixed;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+            }
+
+            100% {
+                transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(-360deg);
+            }
+        }
+
+        #stars {
+            transform: perspective(500px);
+            transform-style: preserve-3d;
+            position: fixed;
+            perspective-origin: 50% 100%;
+            left: 50%;
+            animation: rotate 66s infinite linear;
+            bottom: 0;
+            z-index: -99;
+        }
+
+        .star {
+            width: 2px;
+            height: 2px;
+            background: #f7f7b8;
+            position: fixed;
+            top: 0px;
+            left: 0;
+            backface-visibility: hidden;
+        }
+			
+</style>
+
+</head>
+
+<!--标题轮播图栏-->
+<body onload="init()">
+
+<!-- 标题栏的制作 -->
+<div class="com">
+        <a href="#top"><img src="./img/top.png"  title="点击回到顶部"></a>
+    </div>
+<audio src="music/1.mp3" autoplay="autoplay" controls="controls" loop="loop" preload="auto" ></audio>
+    <table width="1200px" align="center" >
+        <body>
+		
+		<!-- 星星特效 -->
+    <div id="stars">
+    </div>
+    <script>
+        (function () {
+            let starsCount = 1000; //星星数量
+            let distance = 800;//间距
+            let parentStarts = document.getElementById("stars");
+            for (let i = 0; i < starsCount; i++) {
+                let childStart = document.createElement("div");
+                childStart.setAttribute("class", 'star');
+                parentStarts.appendChild(childStart);
+            }
+            for (let i = 0; i < starsCount; i++) {
+                let item = parentStarts.children[i];
+                let speed = 0.2 + (Math.random() * 1);
+                let thisDistance = distance + (Math.random() * 300);
+                console.log(parentStarts);
+                item.style.transformOrigin = "0 0 " + thisDistance + "px";
+                item.style.transform = "translate3d(0,0,-" + thisDistance + "px) rotateY(" + (Math.random() * 360) + "deg) rotateX(" + (Math.random() * -50) + "deg) scale(" + speed + "," + speed + ")";
+            }
+        })();
+    </script>
+	
+                <table border="0px" width="1400px">
+                    <tr height="50px">
+                        <td width="100%" align="center">
+                            <a href="#" > <font color="	#F08080" size="7" face="comic sans ms" ><strong>BAI GUANG SEN</strong></font></a>
+                        </td>
+                    </tr>
+                </table>
+    </table>
+    <table align="center">
+        <tr height="35" >
+            <td width="100%" align="center" >
+                <a href="https://space.bilibili.com/15214084?spm_id_from=444.41.0.0"><font color="#F08080"  size="6"><u>你好，我叫柏广森。很高兴认识你!<u/></font></a>
+            
+			</td>
+        </tr>
+		
+        <!--轮播图-->
+        <tr>
+            <td>
+			<div align="center">
+                <img src="./1.jpg"   id="img1" height="500px" width="700px"/>
+			</div>	
+            </td>
+        </tr>
+    </table>
+		</body>
+</body>
+	
+<!--导航栏-->
+<div class="ue-bar">
+			<div class="ue-bar-wrap">
+				<div class="ue-bar-logo">
+					<a href="#">
+						<img src="./img/h.jpg" 
+						width="45" height="43" alt="hello" title="Hello World"/>
+					</a>
+				</div>
+				<div class="ue-bar-nav">
+					<ul>
+						<li class="active"><a href="#">
+							<em>首页</em></a></li>
+							
+						<li><a href="#grtc">
+							<em>个人特长</em></a></li>
+							
+						<li><a href="#am">
+							<em>About Me</em></a></li>
+							
+						<li><a href="#ml">
+							<em>My Life</em></a></li>
+							
+						<li><a href="#dqxmb">
+							<em>当前小目标</em></a></li>
+							
+						<li><a href="#bjxs">
+							<em>背景欣赏</em></a></li>
+							<em></em></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</html>
+	
+    <!--个人特长段-->
+	<div id="grtc">
+    <table width="1400px" cellspacing="2px" cellpadding="2px" align="center">
+        <tr><th><font face="comic sans ms" size="9"><strong>个人特长：</strong></font></th></tr><br /><br />
+        <tr>
+            <td align="center">
+                <p align="center" ><font size="6" face="楷体">  1、擅长软件的安装与卸载，例如word、excel、ppt、word等；<br /><br />
+
+																2、精通单词拼写，例如PE、PS、PR、C++、Java等；<br /><br />
+
+																3、熟悉电脑系统的开关机，主要包括Windows、Linux、Mac、Android、IOS、WP8等系统。</font></p>
+                <br /><br />
+            </td>
+        </tr>
+    </table>
+	</div>
+	
+    <!--About Me段-->
+	<div id="am">
+    <table width="1400px" cellspacing="2px" cellpadding="2px" align="center">
+        <tr align="center">
+            <td>
+                <font face="comic sans ms" size="9"><strong>About Me</strong></font><br />
+            </td>
+        </tr>
+    </table>
+
+    <table width="1400px" cellspacing="2px" cellpadding="6px" align="center">
+        <tr>
+            <td align="center">
+                <p align="center" ><font size="4" face="楷体">2006年美国周刊年度风云人物</font></p>
+            </td>
+            <td align="center">
+                <p align="center" ><font size="4" face="楷体">2009年年度地球卫士奖</font></p>
+            </td>
+        </tr>
+    </table>
+
+    <table width="1400px" cellpadding="2px" cellspacing="6px" align="center">
+        <tr>
+            <td>
+                <p align="center" ><font size="4" face="楷体">2008年感动中国组委会特别大奖</font></p>
+            </td>
+			<td align="center">
+                <p align="center" ><font size="4" face="楷体">2022年奥林匹克杯获得者</font></p>
+            </td>
+        </tr>
+    </table>
+
+    <table width="140px" cellpadding="0px" cellspacing="0px" align="center">
+        <tr>
+            <td>
+               <img src="./img/a.jpg" align="center" height="400px" width="500px">
+			   <img src="./img/b.jpg" height="400px" width="500px">
+            </td>
+            <td>
+			<p align="center" style="text-indent:2em;"><font size="5" face="楷体" >2006的《时代周刊》年度人物是：You。“You”指的是使用用户分享网站的每一个网民。对此，时代周刊的解释是：“风云人物”是我们每一个人，因为随着博客、网络社区、视频网站的兴起，在2006年因特网发生了重大的转变，网络不再是公共机构或组织，网民正在成长为所谓的“新数字民主主义公民”。</font></p>
+<br> </br>
+<p align="center" style="text-indent:2em;"><font size="5" face="楷体">2008年感动中国的特别奖授予给全体“中国人”。组委会认为，2008年的中国经历了太多悲怆和喜悦，在抗击暴风雪、抗震救灾、举办奥运会、神七航天员太空漫步等事件中，中国人用坚忍、勇敢、智慧向中国和世界交出了满意的答卷。 </td></font></p>
+        </tr>
+        <tr>
+            <td>
+                <p align="center" style="text-indent:2em;"><font size="5" face="楷体">2019年9月，联合国宣布支付宝推出的“蚂蚁森林”项目获得2019年“地球卫士奖”。这个大奖是由5亿多人共同完成的，所以称为“联合获奖人”。
+当年，支付宝还为广大参与了“蚂蚁森林”项目的网友发放了“地球卫士勋章”，妥妥的官方认证！</font></p>
+<br> </br>
+ <p align="center" style="text-indent:2em;"><font size="5" face="楷体">2月19日举行的国际奥委会第139次全会上，国际奥委会主席托马斯·巴赫将“奥林匹克奖杯”授予全体中国人民，以感谢中国人民对于北京冬奥会做出的卓越贡献。
+巴赫在颁奖时说：“如果没有中国人民的支持，北京2022年冬奥会不可能达到如此出色的水平。即使是在闭环中，我们也感受到了中国人民的支持。”奥林匹克奖杯，又名“奥林匹克杯”，是奥林匹克奖项之一，于1906年设立，旨在表彰对奥林匹克运动和国际体育事业做出突出贡献、有良好声誉的团体。</font></p> 
+ </td>
+            <td>
+                  <img src="./img/c.jpg" align="center" height="450px" width="450px">
+				   <img src="./img/d.jpg" align="center" height="300px" width="450px">
+            </td>               
+        </tr>       
+    </table><br /><br />
+	</div>
+	
+    <!--My life段-->
+	<div id="ml">
+    <table width="1400px" cellspacing="2px" cellpadding="2px" align="center">
+        <tr align="center">
+            <td>
+                <font face="comic sans ms" size="9"><strong>My life</strong></font><br />
+            </td>
+        </tr>
+    </table>
+
+    <table width="1400px" cellspacing="2px" cellpadding="2px" align="center">
+        <tr>
+            <td align="center">
+                <p align="center" ><font size="6" face="楷体">“迄今为止的人生都大写这失败，但这不影响我继续向前。”</font></p>
+            </td>
+        </tr>
+    </table>
+	</div>
+	
+<!--背景欣赏-->
+<div id="bjxs">
+    <table width="700px" cellspacing="300px" cellpadding="300px" align="center">
+        <tr>
+            <td align="center">
+			
+            </td>
+        </tr>
+    </table>
+	</div>
+	
+	
+<!--当前小目标-->
+	<div id="dqxmb">
+    <table width="1400px"  height="300px" bgcolor="black" cellpadding="6px" align="center" style="opacity:0.5";>
+        <tr>
+            <td align="center">
+                <p align="center" ><font size="7" face="comic sans ms" color="white">当前小目标</font></p><br /><br /><br />
+                <p align="center" ><font size="4" face="comic sans ms" color="white">Hope my CET4 能过！！</font></p><br /><br />
+                <p align="center" ><font color="white">Copyright ? 2022 个人网站. All rights reserved.</font></p>
+            </td>
+        </tr>
+    </table>
+</body>
+</div>
